@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
@@ -8,11 +9,15 @@ import PoliciesLinks from "./PoliciesLinks"; // Import PoliciesLinks component
 import ContactInfo from "./ContactInfo";
 import ChatbotLink from "./ChatbotLink"; // Import ChatbotLink component
 import ManufacturerCategorizer from "./ManufacturerCategorizer"; // Import ManufacturerCategorizer
+import ShippingOptions from "./ShippingOptions"; // Import ShippingOptions
+import PaymentOptions from "./PaymentOptions"; // Import PaymentOptions
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [cartItems, setCartItems] = useState([]);
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0); // Calculate total dynamically
+  const [shippingOption, setShippingOption] = useState(null); // Track selected shipping option
+  const [paymentOption, setPaymentOption] = useState(""); // Track selected payment option
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + (shippingOption ? shippingOption.cost : 0); // Include shipping cost in total
 
   // Sample categories
   const categories = [
@@ -82,18 +87,29 @@ const App = () => {
     },
   ];
 
+  const handleShippingChange = (method) => {
+    setShippingOption(method); // Update selected shipping option
+  };
+
+  const handlePaymentChange = (method) => {
+    setPaymentOption(method); // Update selected payment option
+  };
+
   return (
     <div className="app">
       <Navbar />
       <h1>Welcome to the Retailer Dashboard</h1>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      
+
       <ManufacturerCategorizer 
         categories={categories} 
         manufacturers={manufacturers} 
         cartItems={cartItems} 
         setCartItems={setCartItems} 
       />
+
+      <ShippingOptions onShippingChange={handleShippingChange} />
+      <PaymentOptions onPaymentChange={handlePaymentChange} />
 
       <Cart cartItems={cartItems} total={total} />
       <Wishlist wishlistItems={[]} />
