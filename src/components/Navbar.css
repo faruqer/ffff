@@ -1,0 +1,35 @@
+/* src/Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #b5d3b6;
+    color: white; /* White text */
+    padding: 15px 30px;
+  }
+  
+  .navbar-title {
+    margin: 0; /* Remove default margin */
+  }
+  
+  .navbar-links {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Flexbox for horizontal layout */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .navbar-links li {
+    margin-left: 20px; /* Space between links */
+  }
+  
+  .navbar-links a {
+    color: white; /* White text color for links */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .navbar-links a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
